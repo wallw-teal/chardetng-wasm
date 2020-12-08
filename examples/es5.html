@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  </head>
+  <body>
+    <script src="../dist/es5/chardetng.es5.min.js"></script>
+    <script>
+      // wasm loading is asynchronous so it cannot be used immediately
+      chardetng.onReady(function() {
+        // detect from a string
+        console.log(chardetng.detect('\u00a0'));
+
+        // or a Uint8TypedArray
+        var enc = new TextEncoder();
+        console.log(chardetng.detect(enc.encode('this is a test')));
+
+        // note that this portion of the API mirrors
+        // https://docs.rs/chardetng/0.1.10/chardetng/struct.EncodingDetector.html
+        var detector = chardetng.EncodingDetector.new();
+
+        // detector.feed(buffer, isLast = false)
+        detector.feed('this is a test');
+        detector.feed(enc.encode('of feeding multiple buffers'), true); // true because we are finished
+
+        // detector.guess(topLevelDomain = 'com', allowUTF8 = false)
+        console.log(detector.guess());
+        console.log(detector.guess(undefined, true));
+      });
+    </script>
+  </body>
+</html>
+

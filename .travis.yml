@@ -1,0 +1,32 @@
+sudo: false
+language: rust
+cache: cargo
+notifications:
+  email: false
+rust: nightly
+env: RUST_BACKTRACE=1
+addons:
+  firefox: latest
+  chrome: stable
+before_script:
+  # rust stuff
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/cargo-generate || cargo install --vers "^0.2" cargo-generate)
+  - cargo install-update -a
+  # wasm-pack
+  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
+  # nvm
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  - export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  - [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  - nvm install stable
+  - nvm use stable
+  - npm install
+script:
+  - commitlint-travis
+  - npm run build
+after_success:
+  - npm run semantic-release
+branches:
+  except:
+  - /^v\d+\.\d+\.\d+$/
