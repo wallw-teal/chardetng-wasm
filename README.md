@@ -7,10 +7,10 @@ Makes [`chardetng`](https://github.com/hsivonen/chardetng) (Firefox's character 
 If you are using the repo directly, build before trying the examples
 
 * Browser
-  * ES5: see [examples/es5.html](blob/master/examples/es5.html)
+  * ES5: see [examples/es5.html](examples/es5.html)
   * ESM: use a bundler such as `npm init wasm-app`
 * Node
-  * ESM: see [examples/node-esm.js](blob/master/examples/node-esm.js) (NOTE: requires `--experimental-wasm-modules`)
+  * ESM: see [examples/node-esm.js](examples/node-esm.js) (NOTE: requires `--experimental-wasm-modules`)
 
 ## API
 
