@@ -10,7 +10,7 @@ If you are using the repo directly, build before trying the examples
   * ES5: see [examples/es5.html](examples/es5.html)
   * ESM: use a bundler such as `npm init wasm-app`
 * Node
-  * ESM: see [examples/node-esm.js](examples/node-esm.js) (NOTE: requires `--experimental-wasm-modules`)
+  * ESM: see [examples/node-esm.mjs](examples/node-esm.mjs) (NOTE: requires `--experimental-wasm-modules`)
 
 ## API
 
