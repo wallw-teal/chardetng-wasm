@@ -8,7 +8,7 @@ If you are using the repo directly, build before trying the examples
 
 * Browser
   * ES5: see [examples/es5.html](blob/master/examples/es5.html)
-  * ESM: use a bundler
+  * ESM: use a bundler such as `npm init wasm-app`
 * Node
   * ESM: see [examples/node-esm.js](blob/master/examples/node-esm.js) (NOTE: requires `--experimental-wasm-modules`)
 
