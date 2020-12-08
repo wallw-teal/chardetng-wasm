@@ -30,8 +30,6 @@ function detect(uint8Array) {
 }
 ```
 
-Example:
-
 ### EncodingDetector
 
 This is an interface to the original `EncodingDetector` struct in Rust. [See those docs for details](https://docs.rs/chardetng/0.1.10/chardetng/struct.EncodingDetector.html).
