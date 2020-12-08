@@ -3,6 +3,7 @@ name = "chardetng-wasm"
 description = "Makes chardetng, Firefox's character encoding detection, available to JS through Web Assembly"
 version = "0.1.0"
 authors = ["William Wall <wwall@caci.com>"]
+repository = "https://github.com/wallw-bits/chardetng-wasm"
 edition = "2018"
 license = "Apache-2.0"
 readme = "README.md"
