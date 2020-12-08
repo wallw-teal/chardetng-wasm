@@ -8,7 +8,7 @@ If you are using the repo directly, build before trying the examples
 
 * Browser
   * ES5: see [examples/es5.html](examples/es5.html)
-  * ESM: use a bundler such as `npm init wasm-app`
+  * ESM: use a bundler such as [`npm init wasm-app`](https://github.com/rustwasm/create-wasm-app)
 * Node
   * ESM: see [examples/node-esm.mjs](examples/node-esm.mjs) (NOTE: requires `--experimental-wasm-modules`)
 
