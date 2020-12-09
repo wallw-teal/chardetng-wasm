@@ -22,7 +22,7 @@ before_script:
   - nvm use --lts stable
   - npm install
 script:
-  - commitlint-travis
+  - npx commitlint-travis
   - npm run build
 after_success:
   - npm run semantic-release
