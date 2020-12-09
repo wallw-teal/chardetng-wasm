@@ -7,10 +7,14 @@
     "test": "wasm-pack test --firefox --headless",
     "build:rust": "wasm-pack build --release --out-dir dist",
     "build:js": "webpack",
-    "modpkg": "rimraf dist/package.json dist/README.md",
+    "modpkg": "rimraf dist/package.json dist/README.md dist/.gitignore dist/LICENSE",
     "build": "npm run init && npm run test && npm run build:rust && npm run modpkg && npm run build:js",
     "semantic-release": "semantic-release"
   },
+  "files": [
+    "dist/**/*",
+    "examples/**/*"
+  ],
   "keywords": [
     "chardetng",
     "encoding",
