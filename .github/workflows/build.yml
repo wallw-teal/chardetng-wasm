@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master ]
   workflow_dispatch:
 
 env:
@@ -63,13 +63,10 @@ jobs:
     - name: Build and Test
       run: npm run build
 
-    - name: Echo
-      run: echo {{ github.ref }}
-
     - name: Release
-      if: ${{ github.ref == 'master' }}
+      if: github.ref == 'refs/heads/master'
       run: npm run semantic-release
-      # with:
-      #   env:
-      #     GH_TOKEN: {{ secrets.GH_TOKEN }}
-      #     NPM_TOKEN: {{ secrets.NPM_TOKEN }}
+      with:
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
