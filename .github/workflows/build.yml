@@ -1,0 +1,75 @@
+name: Build
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+
+    - name: Install wasm-pack
+      uses: jetli/wasm-pack-action@v0.3.0
+      with:
+        version: latest
+
+    - name: Cache Node Modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # npm cache files are stored in ~/.npm on Linux/macOS
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Cache Cargo Dependencies
+      uses: Swatinem/rust-cache@v1
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Lint Commits
+      uses: wagoid/commitlint-github-action@v2
+      env:
+        NODE_PATH: ${{ github.workspace }}/node_modules
+
+    - name: Build and Test
+      run: npm build
+
+  release:
+    if: ${{ github.ref == 'master' }}
+    needs: build
+
+    steps:
+    - name: Semantic Release
+      run: npm run semantic-release
+      with:
+        env:
+          GH_TOKEN: {{ secrets.GH_TOKEN }}
+          NPM_TOKEN: {{ secrets.NPM_TOKEN }}
