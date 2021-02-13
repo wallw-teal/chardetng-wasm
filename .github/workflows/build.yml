@@ -66,7 +66,7 @@ jobs:
     - name: Release
       if: ${{ github.ref == 'master' }}
       run: npm run semantic-release
-      with:
-        env:
-          GH_TOKEN: {{ secrets.GH_TOKEN }}
-          NPM_TOKEN: {{ secrets.NPM_TOKEN }}
+      # with:
+      #   env:
+      #     GH_TOKEN: {{ secrets.GH_TOKEN }}
+      #     NPM_TOKEN: {{ secrets.NPM_TOKEN }}
