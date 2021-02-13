@@ -61,7 +61,10 @@ jobs:
         NODE_PATH: ${{ github.workspace }}/node_modules
 
     - name: Build and Test
-      run: npm build
+      run: npm run build
+
+    - name: Echo
+      run: echo {{ github.ref }}
 
     - name: Release
       if: ${{ github.ref == 'master' }}
